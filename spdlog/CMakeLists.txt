@@ -10,6 +10,8 @@ file(
     "src/*.cpp"
     "*.cc"
 )
+find_package(Threads REQUIRED)
 add_library(spdlog ${HEADERS} ${SOURCES})
-target_compile_definitions(spdlog PUBLIC SPDLOG_COMPILED_LIB)
+set_target_properties(spdlog PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(spdlog PUBLIC Threads::Threads)
 target_include_directories(spdlog PUBLIC "..")
